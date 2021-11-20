@@ -1,7 +1,7 @@
 import requests
 from flask import current_app, abort
 import json
-from main.helpers.redis import set_to_cache, check_max_keys
+from main.helpers.redis import set_to_cache, check_max_keys, client, get_from_cache
 
 
 class Temperature:
@@ -30,6 +30,15 @@ class Temperature:
             }
         }
 
-        size = check_max_keys()
-        set_to_cache(key=city_name, value=result)
+        if check_max_keys() < default_max_number:
+            set_to_cache(key=city_name, value=result)
+
+        return result
+
+    @staticmethod
+    def get_by_length(length):
+        result = []
+        for key in list(client.scan_iter("*"))[:length]:
+            result.append(get_from_cache(key))
+
         return result

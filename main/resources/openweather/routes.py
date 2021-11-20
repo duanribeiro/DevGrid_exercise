@@ -2,7 +2,7 @@ from flask_restplus import Resource, Namespace
 from main.resources.openweather.services import Temperature
 from main.resources.openweather.serializers import response_model
 from main.helpers.redis import get_from_cache
-
+from flask import request, current_app
 import logging
 
 
@@ -36,4 +36,22 @@ class TemperatureByCityName(Resource):
         return Temperature.get_by_city_name(city_name)
 
 
-
+@ns.route('/temperature')
+class TemperatureMain(Resource):
+    @ns.doc(responses={
+        200: 'Success',
+        404: 'Not found.',
+        500: 'Internal Server Error'
+    }, security=None)
+    @ns.marshal_list_with(response_model)
+    @ns.doc(params={'max': {
+        'description': 'Get the cached temperatures for up to the latest max_number queried cities that are still '
+                       'valid.',
+        'type': 'int'
+    }})
+    def get(self):
+        """
+        Temperature endpoint
+        """
+        length = int(request.args.get('max')) if request.args.get('max') else current_app.config['DEFAULT_MAX_NUMBER']
+        return Temperature.get_by_length(length)

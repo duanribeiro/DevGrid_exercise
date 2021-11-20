@@ -23,7 +23,7 @@ class BaseConfig:
         OPENWEATHER_ENDPOINT = 'https://api.openweathermap.org/data/2.5/weather'
         OPENWEATHER_APIKEY = '5ba6e1ac0975af545801d9227ad1e376'
         CACHE_TTL_SECONDS = 180
-        DEFAULT_MAX_NUMBER = 5
+        DEFAULT_MAX_NUMBER = 10
         logger.info('Enviroment variables loaded.')
 
     except KeyError as key:
