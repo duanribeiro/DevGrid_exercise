@@ -1,22 +1,25 @@
 import requests
-from flask import current_app
-from flask_restplus import Api, fields, Resource, marshal
-from main.resources.openweather.serializers import response_model
+from flask import current_app, abort
 import json
+from main.helpers.redis import set_to_cache, check_max_keys
 
 
 class Temperature:
 
     @staticmethod
     def get_by_city_name(city_name):
-        OPENWEATHER_ENDPOINT = current_app.config['OPENWEATHER_ENDPOINT']
-        OPENWEATHER_APIKEY = current_app.config['OPENWEATHER_APIKEY']
+        endpoint = current_app.config['OPENWEATHER_ENDPOINT']
+        apikey = current_app.config['OPENWEATHER_APIKEY']
+        default_max_number = current_app.config['DEFAULT_MAX_NUMBER']
 
-        response = requests.get(f'{OPENWEATHER_ENDPOINT}?q={city_name}&appid={OPENWEATHER_APIKEY}')
+        response = requests.get(f'{endpoint}?q={city_name}&appid={apikey}')
+        if response.status_code == 404:
+            abort(404)
+
         content = json.loads(response.content)
-
         avg = (float(content['main']['temp_min']) + float(content['main']['temp_max'])) / 2
-        response_temperature_model = {
+
+        result = {
             'min': content['main']['temp_min'],
             'max': content['main']['temp_max'],
             'avg': round(avg, 2),
@@ -27,4 +30,6 @@ class Temperature:
             }
         }
 
-        return response_temperature_model
+        size = check_max_keys()
+        set_to_cache(key=city_name, value=result)
+        return result
