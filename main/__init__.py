@@ -12,6 +12,6 @@ api = Api(v1_blueprint,
           description='Flask RESTful API')
 
 
-from main.resources.openweather.routes import api as openweather_namespace
+from main.resources.openweather.routes import ns as openweather_namespace
 api.add_namespace(openweather_namespace)
 
