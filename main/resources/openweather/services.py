@@ -8,6 +8,10 @@ class Temperature:
 
     @staticmethod
     def get_by_city_name(city_name):
+        """Get the current temperature for the specified city_name, either from cache or from the Open Weather API
+        :param city_name: City name to be searched
+        :return JSON data about city
+        """
         endpoint = current_app.config['OPENWEATHER_ENDPOINT']
         apikey = current_app.config['OPENWEATHER_APIKEY']
         default_max_number = current_app.config['DEFAULT_MAX_NUMBER']
@@ -37,6 +41,11 @@ class Temperature:
 
     @staticmethod
     def get_by_length(length):
+        """Get the cached temperatures for up to the latest max_number queried cities that are still valid. If
+        max_number is not provided, default_max_number should be used instead.
+        :param max: Max number queried cities that are still valid
+        :return List with JSON data about all cities
+        """
         result = []
         for key in list(client.scan_iter("*"))[:length]:
             result.append(get_from_cache(key))

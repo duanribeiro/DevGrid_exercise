@@ -6,7 +6,7 @@ from main.helpers.redis import client
 
 class TestRequestTemperature(BaseTestCase):
     def test_records_cached(self):
-        """ Test for request status code """
+        """ Test records cached on redis """
         client.flushall()
         with self.client:
             cities = ["Tokyo", "Dublin", "Paris"]

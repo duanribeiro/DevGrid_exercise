@@ -6,7 +6,7 @@ import time
 
 class TestRequestByCityName(BaseTestCase):
     def test_found(self):
-        """ Test for request status code """
+        """ Test data when city is found """
         with self.client:
             city_name = "Lima"
             response = self.client.get(f'/temperature/{city_name}')
@@ -20,15 +20,14 @@ class TestRequestByCityName(BaseTestCase):
             self.assertIsInstance(data['feels_like'], float)
 
     def test_not_found(self):
-        """ """
+        """ Test data when city is not found """
         with self.client:
             city_name = "!@#!@$!%!#%!#"
             response = self.client.get(f'/temperature/{city_name}')
             self.assertEqual(response.status_code, 404)
 
     def test_cache(self):
-        """ """
-
+        """ Test cached data on redis """
 
         with self.client:
             city_name = "New York"

@@ -1,4 +1,3 @@
-import os
 import unittest
 from flask_testing import TestCase
 from app import app
@@ -11,7 +10,7 @@ class TestDevConfig(TestCase):
         return app
 
     def test_app_is_development(self):
-        """ Test enviroment variables """
+        """ Test DEV enviroment variables """
         self.assertTrue(app.config['DEBUG'] is True)
 
 
@@ -21,7 +20,7 @@ class TestProdConfig(TestCase):
         return app
 
     def test_app_is_production(self):
-        """ Test enviroment variables """
+        """ Test PRD enviroment variables """
         self.assertTrue(app.config['DEBUG'] is False)
 
 

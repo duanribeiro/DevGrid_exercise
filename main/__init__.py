@@ -13,7 +13,5 @@ api = Api(v1_blueprint,
                          a city's temperature, with caching, also allowing for the temperature of the latest queried cities
                          that are still validly cached to be retrieved.""",)
 
-
 from main.resources.openweather.routes import ns as openweather_namespace
 api.add_namespace(openweather_namespace)
-
