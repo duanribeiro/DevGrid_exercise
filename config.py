@@ -1,31 +1,29 @@
 import logging
 import sys
+import os
 
-REDIS_ENDPOINT = 'redis'
-REDIS_PORT = 6379
+logging.basicConfig(
+    level=logging.INFO,
+    format="[%(asctime)s] [%(levelname)s] %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
+logger = logging.getLogger('__name__')
+REDIS_ENDPOINT = os.environ['REDIS_ENDPOINT']
+REDIS_PORT = os.environ['REDIS_PORT']
+
 
 class BaseConfig:
-    # Logger configs
-    logging.basicConfig(
-        level=logging.INFO,
-        format="[%(asctime)s] [%(levelname)s] %(message)s",
-        datefmt="%Y-%m-%d %H:%M:%S"
-    )
-    logger = logging.getLogger('__name__')
-
-    # Other configs
     DEBUG = True
     RESTPLUS_VALIDATE = True
     ERROR_INCLUDE_MESSAGE = False
     RESTPLUS_MASK_SWAGGER = False
     PROPAGATE_EXCEPTIONS = True
 
-    # Env variables
     try:
-        OPENWEATHER_ENDPOINT = 'https://api.openweathermap.org/data/2.5/weather'
-        OPENWEATHER_APIKEY = '5ba6e1ac0975af545801d9227ad1e376'
-        CACHE_TTL_SECONDS = 180
-        DEFAULT_MAX_NUMBER = 10
+        OPENWEATHER_ENDPOINT = os.environ['OPENWEATHER_ENDPOINT']
+        OPENWEATHER_APIKEY = os.environ['OPENWEATHER_APIKEY']
+        CACHE_TTL_SECONDS = int(os.environ['CACHE_TTL_SECONDS'])
+        DEFAULT_MAX_NUMBER = int(os.environ['DEFAULT_MAX_NUMBER'])
         logger.info('Enviroment variables loaded.')
 
     except KeyError as key:
