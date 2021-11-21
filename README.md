@@ -26,7 +26,7 @@ The project structure is based on the official [Flask RESTPlus scaling your proj
 │           ├── routes.py
 │           ├── test_request_by_citY_name.py
 │           └── test_request_temperature.py
-├── main
+├── tests
 │   ├── base.py
 │   ├── test_config.py
 │   ├── serializers.py
