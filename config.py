@@ -1,6 +1,8 @@
 import logging
 import sys
 
+REDIS_ENDPOINT = 'redis'
+REDIS_PORT = 6379
 
 class BaseConfig:
     # Logger configs

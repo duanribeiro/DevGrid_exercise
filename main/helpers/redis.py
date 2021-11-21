@@ -2,10 +2,11 @@ from datetime import timedelta
 from flask import current_app
 import redis
 import json
+from config import REDIS_ENDPOINT, REDIS_PORT
 
 client = redis.Redis(
-    host='localhost',
-    port=6379,
+    host=REDIS_ENDPOINT,
+    port=REDIS_PORT,
     db=0,
     socket_timeout=5,
 )
