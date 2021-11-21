@@ -10,7 +10,7 @@ Design and build a wrapper for the Open Weather API current weather data service
 
 
 ## PROJECT STRUCTURE
-The project structure is based on the official [Flask RESTPlus scaling your project](https://flask-restplus.readthedocs.io/en/stable/scaling.html#multiple-apis-with-reusable-namespaces)
+The project structure is based on the official [Flask RESTPlus scaling your project](https://flask-restplus.readthedocs.io/en/stable/scaling.html)
 
 
 ```
