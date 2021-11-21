@@ -12,6 +12,7 @@ ns = Namespace('', description='Open Weather Wrapper')
 def check_cache(func):
     def wrapper(*args, **kwargs):
         """Wrapper decorator to be used on check is the data is cached
+
         :param kwargs: City name to be searched on cache
         :return JSON data about city
         """
