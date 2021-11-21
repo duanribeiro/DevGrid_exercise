@@ -47,7 +47,7 @@ The project structure is based on the official [Flask RESTPlus scaling your proj
 * `tests` - All the tests used on API.
 
 ##### Files
-* `main/__init__.py` - Resource agroupment for all [Namespaces](https://flask-restplus.readthedocs.io/en/stable/scaling.html#multiple-namespaces).
+* `main/__init__.py` - Resource agroupment for all [Namespaces](https://flask-restplus.readthedocs.io/en/stable/scaling.html).
 * `main/resources/__init__.py` - The Flask Application factory (`create_app()`).  
 * `config.py` - Config file for envs, global config vars and so on.
 * `Dockerfile` - Dockerfile used to build a Docker image.
