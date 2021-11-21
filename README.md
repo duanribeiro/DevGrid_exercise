@@ -43,8 +43,8 @@ The project structure is based on the official [Flask RESTPlus scaling your proj
 ##### Folders
 
 * `main` - All the RESTful API implementation is here.
-* `main/helpers` - Useful function for working with redis cache
-* `tests` - 
+* `main/helpers` - Useful function for working with redis cache.
+* `tests` - All the tests used on API.
 
 ##### Files
 * `main/__init__.py` - Resource agroupment for all `v1` [Namespaces](https://flask-restplus.readthedocs.io/en/stable/scaling.html#multiple-namespaces).
@@ -102,7 +102,7 @@ It will deploy 2 docker containers:
 - redis: Redis container for app cache
 
 ## TESTING
-
+Unittest supports simple test discovery. In order to be compatible with test discovery, all of the test files must be importable from the top-level directory of the project.
 ```
 $ python -m unittest discover .\tests\
 ```
