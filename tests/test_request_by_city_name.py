@@ -28,7 +28,6 @@ class TestRequestByCityName(BaseTestCase):
 
     def test_cache(self):
         """ Test cached data on redis """
-
         with self.client:
             city_name = "New York"
 
